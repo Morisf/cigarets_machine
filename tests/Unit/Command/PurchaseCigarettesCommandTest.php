@@ -39,4 +39,23 @@ class PurchaseCigarettesCommandTest extends KernelTestCase
             'credit' => 0
         ]);
     }
+
+    public function testZeroItemsJustReturnMoney(): void
+    {
+        $kernel = self::bootKernel();
+        $application = new Application($kernel);
+
+        $command = $application->find('app:purchase-cigarettes');
+
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            'amount' => 0,
+            'credit' => 10
+        ]);
+
+        $commandTester->assertCommandIsSuccessful();
+        $output = $commandTester->getDisplay();
+        $this->assertStringContainsString('You bought 0 packs of cigarettes for -0€, each for 0.', $output);
+        $this->assertStringContainsString('| 25    | 40    |', $output);
+    }
 }

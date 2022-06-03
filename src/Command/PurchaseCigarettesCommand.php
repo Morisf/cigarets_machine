@@ -44,7 +44,7 @@ class PurchaseCigarettesCommand extends Command
         $table = new Table($output);
         $table->setHeaders(['Coins', 'Count'])->setRows($result['coins']);
 
-        $output->writeln("You bought {$amount} packs of cigarettes for -{$result['totalPrice']}€, each for -4,99€.");
+        $output->writeln("You bought {$amount} packs of cigarettes for -{$result['totalPrice']}€, each for {$result['itemPrice']}.");
         $output->writeln("Your change is: {$result['change']}€");
         $output->writeln("Your change in coins");
 
