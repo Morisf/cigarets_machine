@@ -19,7 +19,7 @@ class PurchaseCigarettesCommand extends Command
 {
     private PurchaseService $purchaseService;
 
-    public function __construct(string $name = null, PurchaseService $purchaseService)
+    public function __construct(PurchaseService $purchaseService, string $name = null)
     {
         parent::__construct($name);
         $this->purchaseService = $purchaseService;
