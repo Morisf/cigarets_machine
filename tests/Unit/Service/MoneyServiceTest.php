@@ -7,6 +7,26 @@ use PHPUnit\Framework\TestCase;
 
 class MoneyServiceTest extends TestCase
 {
+    public function testCoinsMillion(): void
+    {
+        $service = new MoneyService();
+        $result = $service->getCoins(1000000);
+        $this->assertIsArray($result);
+        $this->assertCount(1, $result);
+        $this->assertEquals(25, $result['25']['coinVal']);
+        $this->assertEquals(40000, $result['25']['coinCount']);
+    }
+
+    public function testCoinsMillionAndOneCent(): void
+    {
+        $service = new MoneyService();
+        $result = $service->getCoins(1000001);
+        $this->assertIsArray($result);
+        $this->assertCount(2, $result);
+        $this->assertEquals(25, $result['25']['coinVal']);
+        $this->assertEquals(40000, $result['25']['coinCount']);
+    }
+
     public function testCoinsReturnOneCents(): void
     {
         $service = new MoneyService();
